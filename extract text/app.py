@@ -1,12 +1,10 @@
 import streamlit as st
 from groq import Groq
-import tempfile
-import os
-import re 
+import tempfile, os, re 
 st.title ("Extract Text from Audio or Video")
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 st.subheader("Upload your audio or video file")
-uploaded = st.file_uploader("Upload your file", type=["mp3", "wav", "mp4", "avi"])
+uploaded = st.file_uploader("Upload your file", type=["mp4", "mp3", "wav", "m4a", "ogg", "webm"])
 def transcribe_audio_file(path):
     with open(path, "rb") as f:
         transcript = client.audio.transcriptions.create(
